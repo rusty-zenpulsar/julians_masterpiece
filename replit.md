@@ -77,7 +77,10 @@ This is a standalone microsite for ZENPULSAR's commodities intelligence platform
 - **Mobile-First CSS**: Responsive design without framework overhead
 
 ## Changelog
-- July 02, 2025. Initial setup
+- July 02, 2025: Initial setup with basic HTML structure
+- July 02, 2025: Added ZENPULSAR logo integration
+- July 02, 2025: Enhanced visual design with modern professional styling
+- July 02, 2025: Added PostgreSQL database with comprehensive schema
 
 ## User Preferences
 
