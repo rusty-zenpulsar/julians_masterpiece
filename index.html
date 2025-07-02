@@ -487,10 +487,10 @@
                 
                 <div class="text-center">
                     <h4 class="text-lg font-semibold text-zp-dark mb-4">Get Started</h4>
-                    <a href="mailto:info@zenpulsar.com?subject=Access Request" 
+                    <button onclick="openAccessModal()" 
                        class="inline-block bg-zp-dark text-white px-8 py-3 font-medium rounded-lg hover:bg-gray-800 transition-all duration-200 shadow-subtle">
                         Request Access
-                    </a>
+                    </button>
                 </div>
             </div>
             
@@ -581,6 +581,79 @@
         </div>
     </div>
 
+    <!-- Access Request Modal -->
+    <div id="accessModal" class="fixed inset-0 z-50 hidden">
+        <!-- Overlay -->
+        <div class="modal-overlay absolute inset-0" onclick="closeAccessModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+            <div class="modal bg-white rounded-lg shadow-2xl max-w-md w-full mx-auto">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between p-6 border-b border-zp-border">
+                    <h3 class="text-2xl font-bold text-zp-dark">Request Access</h3>
+                    <button onclick="closeAccessModal()" class="text-zp-gray hover:text-zp-dark transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Modal Body -->
+                <form id="accessForm" class="p-6 space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="accessFirstName" class="block text-sm font-medium text-zp-dark mb-2">First Name *</label>
+                            <input type="text" id="accessFirstName" name="firstName" required 
+                                   class="w-full px-3 py-2 border border-zp-border rounded-lg focus:ring-2 focus:ring-zp-dark focus:border-transparent transition-colors">
+                        </div>
+                        <div>
+                            <label for="accessLastName" class="block text-sm font-medium text-zp-dark mb-2">Last Name *</label>
+                            <input type="text" id="accessLastName" name="lastName" required 
+                                   class="w-full px-3 py-2 border border-zp-border rounded-lg focus:ring-2 focus:ring-zp-dark focus:border-transparent transition-colors">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="accessEmail" class="block text-sm font-medium text-zp-dark mb-2">Email *</label>
+                        <input type="email" id="accessEmail" name="email" required 
+                               class="w-full px-3 py-2 border border-zp-border rounded-lg focus:ring-2 focus:ring-zp-dark focus:border-transparent transition-colors">
+                    </div>
+                    
+                    <div>
+                        <label for="accessCompany" class="block text-sm font-medium text-zp-dark mb-2">Company *</label>
+                        <input type="text" id="accessCompany" name="company" required 
+                               class="w-full px-3 py-2 border border-zp-border rounded-lg focus:ring-2 focus:ring-zp-dark focus:border-transparent transition-colors">
+                    </div>
+                    
+                    <div>
+                        <label for="accessInterest" class="block text-sm font-medium text-zp-dark mb-2">Area of Interest</label>
+                        <select id="accessInterest" name="interest" 
+                                class="w-full px-3 py-2 border border-zp-border rounded-lg focus:ring-2 focus:ring-zp-dark focus:border-transparent transition-colors">
+                            <option value="">Select an option...</option>
+                            <option value="sentiment-signals">News & Sentiment Trading Signals</option>
+                            <option value="geopolitical-matrix">Geopolitical Risk Matrix</option>
+                            <option value="ai-agents">Multi-Agent AI Systems</option>
+                            <option value="all-products">All Products</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="flex space-x-3 pt-4">
+                        <button type="button" onclick="closeAccessModal()" 
+                                class="flex-1 px-4 py-2 border border-zp-border text-zp-gray rounded-lg hover:bg-gray-50 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" 
+                                class="flex-1 px-4 py-2 bg-zp-dark text-white rounded-lg hover:bg-gray-800 transition-colors">
+                            Request Access
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Demo Modal Functions
         function openDemoModal() {
@@ -641,10 +714,70 @@
             this.reset();
         });
 
+        // Access Modal Functions
+        function openAccessModal() {
+            const modal = document.getElementById('accessModal');
+            const modalContent = modal.querySelector('.modal');
+            modal.classList.remove('hidden');
+            
+            // Trigger animation after a small delay
+            setTimeout(() => {
+                modalContent.classList.add('show');
+            }, 50);
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAccessModal() {
+            const modal = document.getElementById('accessModal');
+            const modalContent = modal.querySelector('.modal');
+            
+            modalContent.classList.remove('show');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Handle access form submission
+        document.getElementById('accessForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                company: formData.get('company'),
+                interest: formData.get('interest') || 'Not specified'
+            };
+            
+            // Create mailto link with form data
+            const subject = encodeURIComponent('Access Request from ' + data.firstName + ' ' + data.lastName);
+            const body = encodeURIComponent(
+                `Access Request Details:\n\n` +
+                `Name: ${data.firstName} ${data.lastName}\n` +
+                `Email: ${data.email}\n` +
+                `Company: ${data.company}\n` +
+                `Area of Interest: ${data.interest}\n\n` +
+                `Submitted from ZENPULSAR Microsite`
+            );
+            
+            const mailtoLink = `mailto:info@zenpulsar.com?subject=${subject}&body=${body}`;
+            window.location.href = mailtoLink;
+            
+            // Close modal and reset form
+            closeAccessModal();
+            this.reset();
+        });
+
         // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeDemoModal();
+                closeAccessModal();
             }
         });
 
