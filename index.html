@@ -75,6 +75,19 @@
         .mobile-menu.open {
             max-height: 300px;
         }
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+        .modal {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+        .modal.show {
+            transform: scale(1);
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="font-inter bg-white text-zp-dark">
@@ -94,10 +107,10 @@
                     <a href="#why-it-matters" class="text-zp-gray hover:text-zp-dark transition-colors font-medium">Why It Matters</a>
                     <a href="#pricing" class="text-zp-gray hover:text-zp-dark transition-colors font-medium">Pricing</a>
                     <a href="#contact" class="text-zp-gray hover:text-zp-dark transition-colors font-medium">Contact</a>
-                    <a href="mailto:info@zenpulsar.com?subject=Demo Request" 
+                    <button onclick="openDemoModal()" 
                        class="bg-zp-dark text-white px-6 py-2 rounded-lg font-medium hover:bg-gray-800 transition-colors">
                         Request Demo
-                    </a>
+                    </button>
                 </div>
                 
                 <!-- Mobile Menu Button -->
@@ -116,10 +129,10 @@
                     <a href="#why-it-matters" class="block text-zp-gray hover:text-zp-dark transition-colors font-medium">Why It Matters</a>
                     <a href="#pricing" class="block text-zp-gray hover:text-zp-dark transition-colors font-medium">Pricing</a>
                     <a href="#contact" class="block text-zp-gray hover:text-zp-dark transition-colors font-medium">Contact</a>
-                    <a href="mailto:info@zenpulsar.com?subject=Demo Request" 
+                    <button onclick="openDemoModal()" 
                        class="inline-block bg-zp-dark text-white px-6 py-2 rounded-lg font-medium hover:bg-gray-800 transition-colors mt-4">
                         Request Demo
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -135,10 +148,10 @@
             <p class="text-xl md:text-2xl text-zp-gray mb-16 max-w-4xl mx-auto leading-relaxed font-medium">
                 Real-time geopolitical signals, AI-driven sentiment, and stress-tested insight for commodity trading.
             </p>
-            <a href="mailto:info@zenpulsar.com?subject=Demo Request" 
+            <button onclick="openDemoModal()" 
                class="inline-block bg-zp-dark text-white px-14 py-5 text-lg font-semibold rounded-lg hover:bg-gray-800 transition-all duration-200 shadow-card hover:shadow-lg">
                 Request Demo
-            </a>
+            </button>
         </div>
     </section>
 
@@ -449,10 +462,10 @@
             <p class="text-xl text-zp-gray mb-12 leading-relaxed max-w-3xl mx-auto">
                 Start with a pilot. Demonstrate ROI before scaling.
             </p>
-            <a href="mailto:info@zenpulsar.com?subject=Initial Call Request" 
+            <button onclick="openDemoModal()" 
                class="inline-block bg-zp-dark text-white px-14 py-5 text-lg font-semibold rounded-lg hover:bg-gray-800 transition-all duration-200 shadow-card hover:shadow-lg">
                 Book Initial Call
-            </a>
+            </button>
         </div>
     </section>
 
@@ -507,16 +520,150 @@
 
     <!-- Floating Demo Button -->
     <div class="fixed bottom-8 right-8 z-40 hidden lg:block">
-        <a href="mailto:info@zenpulsar.com?subject=Demo Request" 
+        <button onclick="openDemoModal()" 
            class="bg-zp-dark text-white px-6 py-3 rounded-full font-medium shadow-lg hover:bg-gray-800 hover:shadow-xl transition-all duration-200 flex items-center space-x-2">
             <span>Request Demo</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
-        </a>
+        </button>
+    </div>
+
+    <!-- Demo Request Modal -->
+    <div id="demoModal" class="fixed inset-0 z-50 hidden">
+        <!-- Overlay -->
+        <div class="modal-overlay absolute inset-0" onclick="closeDemoModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+            <div class="modal bg-white rounded-lg shadow-2xl max-w-md w-full mx-auto">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between p-6 border-b border-zp-border">
+                    <h3 class="text-2xl font-bold text-zp-dark">Request Demo</h3>
+                    <button onclick="closeDemoModal()" class="text-zp-gray hover:text-zp-dark transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Modal Body -->
+                <form id="demoForm" class="p-6 space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="firstName" class="block text-sm font-medium text-zp-dark mb-2">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required 
+                                   class="w-full px-3 py-2 border border-zp-border rounded-lg focus:ring-2 focus:ring-zp-dark focus:border-transparent transition-colors">
+                        </div>
+                        <div>
+                            <label for="lastName" class="block text-sm font-medium text-zp-dark mb-2">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required 
+                                   class="w-full px-3 py-2 border border-zp-border rounded-lg focus:ring-2 focus:ring-zp-dark focus:border-transparent transition-colors">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-zp-dark mb-2">Email *</label>
+                        <input type="email" id="email" name="email" required 
+                               class="w-full px-3 py-2 border border-zp-border rounded-lg focus:ring-2 focus:ring-zp-dark focus:border-transparent transition-colors">
+                    </div>
+                    
+                    <div>
+                        <label for="company" class="block text-sm font-medium text-zp-dark mb-2">Company *</label>
+                        <input type="text" id="company" name="company" required 
+                               class="w-full px-3 py-2 border border-zp-border rounded-lg focus:ring-2 focus:ring-zp-dark focus:border-transparent transition-colors">
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-zp-dark mb-2">Message (Optional)</label>
+                        <textarea id="message" name="message" rows="3" 
+                                  class="w-full px-3 py-2 border border-zp-border rounded-lg focus:ring-2 focus:ring-zp-dark focus:border-transparent transition-colors"
+                                  placeholder="Tell us about your specific requirements..."></textarea>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="flex space-x-3 pt-4">
+                        <button type="button" onclick="closeDemoModal()" 
+                                class="flex-1 px-4 py-2 border border-zp-border text-zp-gray rounded-lg hover:bg-gray-50 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" 
+                                class="flex-1 px-4 py-2 bg-zp-dark text-white rounded-lg hover:bg-gray-800 transition-colors">
+                            Send Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
+        // Demo Modal Functions
+        function openDemoModal() {
+            const modal = document.getElementById('demoModal');
+            const modalContent = modal.querySelector('.modal');
+            modal.classList.remove('hidden');
+            
+            // Trigger animation after a small delay
+            setTimeout(() => {
+                modalContent.classList.add('show');
+            }, 50);
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDemoModal() {
+            const modal = document.getElementById('demoModal');
+            const modalContent = modal.querySelector('.modal');
+            
+            modalContent.classList.remove('show');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Handle form submission
+        document.getElementById('demoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                company: formData.get('company'),
+                message: formData.get('message') || ''
+            };
+            
+            // Create mailto link with form data
+            const subject = encodeURIComponent('Demo Request from ' + data.firstName + ' ' + data.lastName);
+            const body = encodeURIComponent(
+                `Demo Request Details:\n\n` +
+                `Name: ${data.firstName} ${data.lastName}\n` +
+                `Email: ${data.email}\n` +
+                `Company: ${data.company}\n` +
+                `Message: ${data.message}\n\n` +
+                `Submitted from ZENPULSAR Microsite`
+            );
+            
+            const mailtoLink = `mailto:info@zenpulsar.com?subject=${subject}&body=${body}`;
+            window.location.href = mailtoLink;
+            
+            // Close modal and reset form
+            closeDemoModal();
+            this.reset();
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeDemoModal();
+            }
+        });
+
         // Navbar scroll behavior
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
