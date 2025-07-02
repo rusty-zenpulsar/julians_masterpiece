@@ -8,8 +8,14 @@ This is a standalone microsite for ZENPULSAR's commodities intelligence platform
 
 ### Frontend Architecture
 - **Static HTML/CSS/JavaScript**: Single-page application built with vanilla HTML, styled with Tailwind CSS
-- **No Framework Dependencies**: Minimal JavaScript footprint for maximum performance
+- **Navigation System**: Fixed top navigation with smooth scrolling, mobile hamburger menu, and scroll-based navbar compression
+- **Animation Framework**: Intersection Observer API for fade-in animations, CSS transitions for hover effects
 - **CDN-Based Resources**: Tailwind CSS and Google Fonts loaded via CDN for optimal caching
+
+### Database Architecture
+- **PostgreSQL Database**: Configured with comprehensive schema for user management, demo requests, subscriptions, analytics, and contact forms
+- **Drizzle ORM**: Type-safe database operations with schema-first approach
+- **Tables**: users, demo_requests, subscriptions, page_views, contact_submissions with proper relations
 
 ### Design System
 - **Typography**: Inter font family for clean, professional appearance
@@ -81,6 +87,8 @@ This is a standalone microsite for ZENPULSAR's commodities intelligence platform
 - July 02, 2025: Added ZENPULSAR logo integration
 - July 02, 2025: Enhanced visual design with modern professional styling
 - July 02, 2025: Added PostgreSQL database with comprehensive schema
+- July 02, 2025: Implemented professional navigation system with fixed top navbar, smooth scrolling, and mobile hamburger menu
+- July 02, 2025: Added scroll-based animations, section dividers, enhanced card hover effects, and floating demo button
 
 ## User Preferences
 
