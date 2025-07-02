@@ -1,0 +1,128 @@
+
+
+I want to build a standalone microsite for ZENPULSAR's commodities intelligence platform. It should be inspired by our main site https://zenpulsar.com in tone and professionalism, but this microsite should use a white or light background, with a clean, product-focused, information-first design.
+
+Design Requirements:
+
+White/light background
+
+Black or dark grey headings and clean sans-serif typography (e.g. Inter, IBM Plex Sans)
+
+No animations, video backgrounds, parallax, or unnecessary JavaScript
+
+Desktop and tablet-first layout (mobile optional)
+
+Minimalist, readable, and fast-loading
+
+Site Structure (single-page or scroll-based layout):
+
+1. Hero Section
+Title: ZENPULSAR COMMODITIES INTELLIGENCE
+
+Subtitle: Real-time geopolitical signals, AI-driven sentiment, and stress-tested insight for commodity trading.
+
+CTA Button: Request Demo
+
+2. Overview
+Text block with left-aligned paragraph:
+
+ZENPULSAR delivers structured, AI-driven intelligence for commodity trading and risk management. Our platform combines global news monitoring, geopolitical signal extraction, and modular AI agents to replace outdated workflows and enable faster, better-informed decisions.
+We help trading teams stress-test strategies, detect early geopolitical disruptions, and extract actionable sentiment from market-moving events — all in real time.
+
+3. Core Offerings (Three Columns or Cards)
+Offering 1: News & Sentiment-Based Trading Signals
+Signals extracted from over 3 million daily articles in 185 languages using advanced NLP and LLMs
+
+Each article scored as bullish or bearish, with confidence level included
+
+Licensed content used for structured signal extraction
+
+Coverage includes copper, aluminium, urea, phosphate, sugar, grains, energy
+
+Captures signals on real-world disruptions: strikes, sanctions, export bans, weather
+
+Proven correlation with intraday and T-day price movements (especially for copper and aluminium)
+
+Feed/API/MCP integration-ready
+
+Works with internal strategies via AI agent pipelines
+
+Offering 2: Geopolitical & Tariff Risk Factor Matrix
+Stress-test trading strategies against war, sanctions, export restrictions, and regime instability
+
+Live geopolitical data and narrative signals, not backward-looking indicators
+
+Built-in taxonomy of policy triggers: tariffs, export controls, regulatory shifts, diplomatic tension
+
+Supports scenario testing, volatility forecasting, and regional hedging
+
+Currently in development with early design partners, incl. Trafigura and Open Mineral
+
+Offering 3: Multi-Agent AI Systems
+Modular AI agents designed for commodity-specific research tasks
+
+Agents can work autonomously or in pipelines
+
+Example agents include:
+– Rice news summarizer (used by MDM)
+– Urea quote tracker (CFR Brazil, FOB Egypt)
+– Argus report parser for fertilizer data
+
+Replaces PDFs, emails, and chat-driven workflows
+
+Custom-built or standardized per market, region, or report format
+
+4. Why It Matters
+Short text block + bullet points:
+
+The commodities sector remains structurally behind in intelligence. Most traders still rely on PDFs, emails, and generic sentiment tools built for equities. Meanwhile, real-world shocks — from coup attempts to export bans — increasingly define commodity risk.
+
+Real-time geopolitical and sentiment signals tied to specific contracts, geographies, and products
+
+Modular AI agents that automate research and workflow
+
+Strategy stress-testing tools for real-world volatility
+
+ZENPULSAR does not build dashboards — we replace inefficient decision infrastructure
+
+
+Pricing 
+Three pricing cards:
+
+Sentiment Feed – Custom pricing
+Daily or intraday feed by commodity and region. API + confidence score.
+
+AI Agent Systems – Custom pricing
+Modular agent tools for parsing, summarizing, monitoring.
+
+Geopolitical Risk Matrix – Custom pricing
+Strategy validation tool, in early-stage development with launch clients.
+
+5. Call to Action (End of Page)
+Centered text and button:
+
+Text: Start with a pilot. Demonstrate ROI before scaling.
+Button: Book Initial Call
+
+6. Footer
+Simple footer layout:
+
+ZENPULSAR logo or wordmark
+
+Link to main site: https://zenpulsar.com
+
+Contact: info@zenpulsar.com
+
+Optional: inline contact form or "Request Access" link
+
+Tech Notes:
+
+Use HTML and TailwindCSS (or plain CSS)
+
+No React required unless helpful for reusable components
+
+Static or lightweight build preferred for fast load and low error rate
+
+Make all sections modular and easy to update later (e.g. adding copper, rice, or sugar-specific agents)
+
+
