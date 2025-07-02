@@ -12,6 +12,12 @@ This is a standalone microsite for ZENPULSAR's commodities intelligence platform
 - **Animation Framework**: Intersection Observer API for fade-in animations, CSS transitions for hover effects
 - **CDN-Based Resources**: Tailwind CSS and Google Fonts loaded via CDN for optimal caching
 
+### Backend Architecture
+- **Node.js HTTP Server**: Custom server (server.js) for static file serving and deployment compatibility
+- **Health Check Endpoints**: `/health` and `/healthz` for deployment monitoring and load balancer health checks
+- **Static File Serving**: Efficient file serving with proper MIME types and security checks
+- **Graceful Shutdown**: SIGTERM handling for proper deployment lifecycle management
+
 ### Database Architecture
 - **PostgreSQL Database**: Configured with comprehensive schema for user management, demo requests, subscriptions, analytics, and contact forms
 - **Drizzle ORM**: Type-safe database operations with schema-first approach
@@ -71,10 +77,11 @@ This is a standalone microsite for ZENPULSAR's commodities intelligence platform
 ## Deployment Strategy
 
 ### Hosting Requirements
-- **Static Site Hosting**: Any CDN or static hosting provider
-- **No Server-Side Processing**: Pure client-side delivery
+- **Node.js Server**: Custom HTTP server with health check endpoints
+- **Replit Deployments**: Optimized for Replit's deployment infrastructure
 - **SSL Certificate**: HTTPS recommended for professional appearance
-- **Caching Strategy**: Long-term caching for static assets
+- **Caching Strategy**: Long-term caching for static assets (1 hour cache-control)
+- **Health Checks**: Available at `/health` and `/healthz` endpoints for deployment monitoring
 
 ### Performance Optimizations
 - **Minimal JavaScript**: Only Tailwind config for custom styling
@@ -92,6 +99,7 @@ This is a standalone microsite for ZENPULSAR's commodities intelligence platform
 - July 02, 2025: Updated with exact ZENPULSAR content and messaging across all sections
 - July 02, 2025: Added Request Access form modal with product selection dropdown
 - July 02, 2025: Pre-deployment validation completed - site ready for production
+- July 02, 2025: Fixed deployment issues by creating proper Node.js server with health check endpoints for Replit Deployments
 
 ## User Preferences
 
