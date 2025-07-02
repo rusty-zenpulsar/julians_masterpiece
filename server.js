@@ -4,6 +4,11 @@ const path = require('path');
 
 const PORT = process.env.PORT || 5000;
 
+console.log('Environment variables:');
+console.log('PORT:', process.env.PORT);
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('Starting server on port:', PORT);
+
 // MIME types for common file extensions
 const mimeTypes = {
   '.html': 'text/html',
