@@ -1,0 +1,69 @@
+Please improve the design and structure of this microsite to make it look like a professional, modern B2B fintech/data platform. Follow the instructions below carefully:
+
+1. Navigation
+Add a clean, sticky top-right navigation bar
+
+Include anchor links: Overview, Core Offerings, Why It Matters, Pricing, Contact
+
+Keep the nav bar visible while scrolling and reduce its height slightly on scroll
+
+Add a subtle shadow or border underneath the nav bar
+
+2. Layout & Structure
+Use max-width containers for all text content (e.g. max-w-4xl mx-auto) so content doesn’t stretch across the entire screen
+
+Add extra spacing (py-16, mb-12) between sections for breathing room
+
+Alternate section background colors: use light grey (#f9f9f9) or pale blue (#f0f4f8) to visually separate sections
+
+3. Typography & Hierarchy
+Use a clean, modern font like Inter or IBM Plex Sans
+
+Make section titles large (text-3xl or text-4xl) and bold
+
+Use clear hierarchy: titles, then subtitles, then body text
+
+Increase line spacing (leading-relaxed) and padding for all paragraph text
+
+4. Core Offerings Section
+Convert the 3 offerings into cards with shadows and rounded corners
+
+Add a hover effect (hover:shadow-lg, hover:scale-105, transition-all)
+
+Each card should have:
+
+A title
+
+Short list of key features
+
+Optional icon (if possible)
+
+5. Pricing Section
+Use the same card layout as Core Offerings
+
+Add subtle divider lines or background tint behind pricing section
+
+Make sure pricing cards are spaced and aligned consistently
+
+6. CTA Button
+Make the "Book Initial Call" button fixed at the bottom-right corner on desktop view only
+
+Use a solid button style (e.g. dark blue background, white text, px-6 py-3, rounded-full)
+
+Add hover effect to the button (hover:bg-opacity-90)
+
+7. Animations and Interactions
+Add fade-in animation for each section or card as the user scrolls into view
+
+Only trigger animation once per section to avoid distraction
+
+8. Footer
+Create a clean footer with:
+
+ZENPULSAR logo or wordmark (text is fine)
+
+Contact email: info@zenpulsar.com
+
+Link to main site: https://zenpulsar.com
+
+The site should feel like a modern B2B SaaS website — clean, readable, confident, and well-spaced. Prioritize hierarchy, scannability, and polish.
