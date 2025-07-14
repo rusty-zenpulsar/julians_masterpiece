@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "@neondatabase/serverless": "^1.0.1",
+    "@slack/web-api": "^7.9.3",
     "autoprefixer": "^10.4.21",
     "drizzle-kit": "^0.31.4",
     "drizzle-orm": "^0.44.2",
