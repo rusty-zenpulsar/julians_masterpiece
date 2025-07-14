@@ -718,9 +718,7 @@
             
             const formData = new FormData(this);
             const data = {
-                name: formData.get('firstName') + ' ' + formData.get('lastName'),
                 email: formData.get('email'),
-                company: formData.get('company'),
                 product: formData.get('interest') || 'Not specified'
             };
             
