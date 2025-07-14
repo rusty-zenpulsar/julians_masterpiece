@@ -1,6 +1,0 @@
-name              = "zenpulsar-landing"
-account_id        = "fbafcc4711815e2a954566fdae8c99a6"
-compatibility_date = "2025-07-14"
-
-[site]
-bucket = "." 
