@@ -718,8 +718,11 @@
             
             const formData = new FormData(this);
             const data = {
+                name: formData.get('firstName') + ' ' + formData.get('lastName'),
                 email: formData.get('email'),
-                product: formData.get('interest') || 'Not specified'
+                company: formData.get('company'),
+                product: formData.get('interest') || 'Not specified',
+                message: 'Request for access to ZENPULSAR platform'
             };
             
             // Show loading state
@@ -730,7 +733,7 @@
             
             try {
                 // Send to Slack via API
-                const response = await fetch('/api/demo-request', {
+                const response = await fetch('/api/submit-form', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
