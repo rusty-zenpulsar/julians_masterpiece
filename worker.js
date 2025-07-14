@@ -730,7 +730,7 @@ const HTML_CONTENT = `<!DOCTYPE html>
         }
 
         // Handle form submission
-        document.getElementById('demoForm').addEventListener('submit', function(e) {
+        document.getElementById('demoForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
@@ -742,19 +742,40 @@ const HTML_CONTENT = `<!DOCTYPE html>
                 message: formData.get('message') || ''
             };
             
-            // Create mailto link with form data
-            const subject = encodeURIComponent('Demo Request from ' + data.firstName + ' ' + data.lastName);
-            const body = encodeURIComponent(
-                \`Demo Request Details:\\n\\n\` +
-                \`Name: \${data.firstName} \${data.lastName}\\n\` +
-                \`Email: \${data.email}\\n\` +
-                \`Company: \${data.company}\\n\` +
-                \`Message: \${data.message}\\n\\n\` +
-                \`Submitted from ZENPULSAR Microsite\`
-            );
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
             
-            const mailtoLink = \`mailto:info@zenpulsar.com?subject=\${subject}&body=\${body}\`;
-            window.location.href = mailtoLink;
+            try {
+                // Send to Slack via API
+                const response = await fetch('/api/submit-form', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: data.firstName + ' ' + data.lastName,
+                        email: data.email,
+                        company: data.company,
+                        message: data.message
+                    })
+                });
+                
+                if (response.ok) {
+                    alert('Demo request sent successfully to Slack!');
+                } else {
+                    throw new Error('Failed to send request');
+                }
+            } catch (error) {
+                console.error('Error sending form:', error);
+                alert('Failed to send request. Please try again.');
+            } finally {
+                // Reset button state
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
             
             // Close modal and reset form
             closeDemoModal();
@@ -789,7 +810,7 @@ const HTML_CONTENT = `<!DOCTYPE html>
         }
 
         // Handle access form submission
-        document.getElementById('accessForm').addEventListener('submit', function(e) {
+        document.getElementById('accessForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
@@ -801,19 +822,40 @@ const HTML_CONTENT = `<!DOCTYPE html>
                 interest: formData.get('interest') || 'Not specified'
             };
             
-            // Create mailto link with form data
-            const subject = encodeURIComponent('Access Request from ' + data.firstName + ' ' + data.lastName);
-            const body = encodeURIComponent(
-                \`Access Request Details:\\n\\n\` +
-                \`Name: \${data.firstName} \${data.lastName}\\n\` +
-                \`Email: \${data.email}\\n\` +
-                \`Company: \${data.company}\\n\` +
-                \`Area of Interest: \${data.interest}\\n\\n\` +
-                \`Submitted from ZENPULSAR Microsite\`
-            );
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
             
-            const mailtoLink = \`mailto:info@zenpulsar.com?subject=\${subject}&body=\${body}\`;
-            window.location.href = mailtoLink;
+            try {
+                // Send to Slack via API
+                const response = await fetch('/api/demo-request', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: data.firstName + ' ' + data.lastName,
+                        email: data.email,
+                        company: data.company,
+                        product: data.interest
+                    })
+                });
+                
+                if (response.ok) {
+                    alert('Access request sent successfully to Slack!');
+                } else {
+                    throw new Error('Failed to send request');
+                }
+            } catch (error) {
+                console.error('Error sending form:', error);
+                alert('Failed to send request. Please try again.');
+            } finally {
+                // Reset button state
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
             
             // Close modal and reset form
             closeAccessModal();
