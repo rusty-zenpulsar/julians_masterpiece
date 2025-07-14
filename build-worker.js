@@ -1,4 +1,3 @@
-// Build script to create worker.js with embedded HTML
 const fs = require('fs');
 
 // Read the HTML file
@@ -38,7 +37,7 @@ async function handleRequest(request) {
     })
   }
   
-  // Handle logo.png - you'll need to convert this to base64 or use a CDN
+  // Handle logo.png - serving a 404 for now
   if (url.pathname === '/logo.png') {
     return new Response('Logo not found - upload to Workers assets or use CDN', { 
       status: 404,
@@ -63,5 +62,5 @@ const HTML_CONTENT = \`${escapedHtml}\`;`;
 // Write the worker.js file
 fs.writeFileSync('worker.js', workerContent);
 
-console.log('worker.js has been created successfully!');
-console.log('You can now deploy with: wrangler publish');
+console.log('worker.js created successfully for Cloudflare Workers deployment!');
+console.log('Run: wrangler publish');

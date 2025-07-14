@@ -25,7 +25,7 @@ async function handleRequest(request) {
     })
   }
   
-  // Handle logo.png - you'll need to convert this to base64 or use a CDN
+  // Handle logo.png - serving a 404 for now
   if (url.pathname === '/logo.png') {
     return new Response('Logo not found - upload to Workers assets or use CDN', { 
       status: 404,
@@ -51,7 +51,6 @@ const HTML_CONTENT = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZENPULSAR Commodities Intelligence</title>
-    <!-- Updated: 2025-07-07 08:16 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -312,7 +311,7 @@ const HTML_CONTENT = `<!DOCTYPE html>
                             </li>
                             <li class="flex items-start leading-relaxed">
                                 <span class="w-1.5 h-1.5 bg-zp-dark rounded-full mt-2.5 mr-4 flex-shrink-0"></span>
-                                <span class="text-sm">Developed with launch partners including Impro.Ai</span>
+                                <span class="text-sm">Developed with launch partners including Trafigura and Open Mineral</span>
                             </li>
                         </ul>
                     </div>
@@ -336,8 +335,8 @@ const HTML_CONTENT = `<!DOCTYPE html>
                                 <div class="text-sm">
                                     <div class="mb-2">Examples:</div>
                                     <div class="ml-4 space-y-1 text-xs text-zp-light-gray">
-                                        <div>– Urea quote tracker</div>
-                                        <div>– Rice market agent</div>
+                                        <div>– Urea quote tracker (CFR Brazil, FOB Egypt)</div>
+                                        <div>– Rice market agent for MDM</div>
                                         <div>– Argus parser for fertilizer pricing</div>
                                     </div>
                                 </div>

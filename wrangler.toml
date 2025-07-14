@@ -2,20 +2,8 @@ name = "zenpulsar-commodities"
 main = "worker.js"
 compatibility_date = "2024-01-01"
 
-[site]
-bucket = "./"
-entry-point = "."
-
-[[routes]]
-pattern = "*"
-zone_name = "your-domain.com"
-
 [env.production]
 name = "zenpulsar-commodities-prod"
 
 [env.staging]
 name = "zenpulsar-commodities-staging"
-
-# Static assets configuration
-[build]
-command = ""
