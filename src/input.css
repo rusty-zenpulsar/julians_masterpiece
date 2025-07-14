@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles */
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: #1a1a1a;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.prose {
+  max-width: none;
+}
+
+/* Custom animations */
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Custom component styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  color: white;
+  background-color: #1a1a1a;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: rgba(26, 26, 26, 0.9);
+}
+
+.btn-primary:focus {
+  outline: 2px solid #1a1a1a;
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #e5e7eb;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  color: #1a1a1a;
+  background-color: white;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #f9f9f9;
+}
+
+.btn-secondary:focus {
+  outline: 2px solid #1a1a1a;
+  outline-offset: 2px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  padding: 1.5rem;
+  transition: all 0.2s;
+}
+
+.card-hover:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-0.25rem);
+}
+
+.nav-link {
+  color: #4a4a4a;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #1a1a1a;
+}
+
+.section-divider {
+  border-top: 1px solid #e5e7eb;
+}

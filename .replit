@@ -16,6 +16,10 @@ author = "agent"
 task = "workflow.run"
 args = "start"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "build-css"
+
 [[workflows.workflow]]
 name = "start"
 author = "agent"
@@ -24,6 +28,14 @@ author = "agent"
 task = "shell.exec"
 args = "node server.js"
 waitForPort = 5000
+
+[[workflows.workflow]]
+name = "build-css"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx tailwindcss -i ./src/input.css -o ./public/styles.css --watch"
 
 [[ports]]
 localPort = 5000
