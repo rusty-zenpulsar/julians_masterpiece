@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
         html {
@@ -613,6 +614,10 @@
     </div>
 
     <script>
+        // Slack configuration - добавьте ваши данные
+        const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK'; // Замените на ваш webhook URL
+        const SLACK_CHANNEL = '#general'; // Замените на ваш канал
+        
         // Demo Modal Functions
         function openDemoModal() {
             const modal = document.getElementById('demoModal');
@@ -640,8 +645,29 @@
             }, 300);
         }
 
-        // Handle form submission
-        document.getElementById('demoForm').addEventListener('submit', async function(e) {
+        // Function to send message to Slack
+        function sendToSlack(message) {
+            return $.ajax({
+                url: SLACK_WEBHOOK_URL,
+                method: 'POST',
+                data: JSON.stringify({
+                    channel: SLACK_CHANNEL,
+                    text: message.text,
+                    blocks: message.blocks || []
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log('Message sent to Slack successfully');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error sending to Slack:', error);
+                    throw new Error('Failed to send to Slack');
+                }
+            });
+        }
+
+        // Handle demo form submission
+        $('#demoForm').on('submit', function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
@@ -653,36 +679,68 @@
             };
             
             // Show loading state
-            const submitButton = this.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
+            const $submitButton = $(this).find('button[type="submit"]');
+            const originalText = $submitButton.text();
+            $submitButton.text('Sending...').prop('disabled', true);
             
-            try {
-                // Send to Slack via API
-                const response = await fetch('/api/submit-form', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
+            // Create Slack message
+            const slackMessage = {
+                text: `📋 New Demo Request from ${data.name}`,
+                blocks: [
+                    {
+                        type: 'header',
+                        text: {
+                            type: 'plain_text',
+                            text: '📋 New Demo Request - ZENPULSAR'
+                        }
                     },
-                    body: JSON.stringify(data)
-                });
-                
-                if (response.ok) {
+                    {
+                        type: 'section',
+                        fields: [
+                            {
+                                type: 'mrkdwn',
+                                text: `*Name:* ${data.name}`
+                            },
+                            {
+                                type: 'mrkdwn',
+                                text: `*Email:* ${data.email}`
+                            },
+                            {
+                                type: 'mrkdwn',
+                                text: `*Company:* ${data.company}`
+                            },
+                            {
+                                type: 'mrkdwn',
+                                text: `*Message:* ${data.message || 'No message provided'}`
+                            }
+                        ]
+                    },
+                    {
+                        type: 'context',
+                        elements: [
+                            {
+                                type: 'mrkdwn',
+                                text: `Submitted on ${new Date().toLocaleString()}`
+                            }
+                        ]
+                    }
+                ]
+            };
+            
+            // Send to Slack
+            sendToSlack(slackMessage)
+                .done(function() {
                     alert('Demo request sent successfully to Slack!');
                     closeDemoModal();
-                    this.reset();
-                } else {
-                    throw new Error('Failed to send request');
-                }
-            } catch (error) {
-                console.error('Error sending form:', error);
-                alert('Failed to send request. Please try again.');
-            } finally {
-                // Reset button state
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-            }
+                    $('#demoForm')[0].reset();
+                })
+                .fail(function() {
+                    alert('Failed to send request. Please try again.');
+                })
+                .always(function() {
+                    // Reset button state
+                    $submitButton.text(originalText).prop('disabled', false);
+                });
         });
 
         // Access Modal Functions
@@ -713,7 +771,7 @@
         }
 
         // Handle access form submission
-        document.getElementById('accessForm').addEventListener('submit', async function(e) {
+        $('#accessForm').on('submit', function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
@@ -721,41 +779,72 @@
                 name: formData.get('firstName') + ' ' + formData.get('lastName'),
                 email: formData.get('email'),
                 company: formData.get('company'),
-                product: formData.get('interest') || 'Not specified',
-                message: 'Request for access to ZENPULSAR platform'
+                product: formData.get('interest') || 'Not specified'
             };
             
             // Show loading state
-            const submitButton = this.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
+            const $submitButton = $(this).find('button[type="submit"]');
+            const originalText = $submitButton.text();
+            $submitButton.text('Sending...').prop('disabled', true);
             
-            try {
-                // Send to Slack via API
-                const response = await fetch('/api/submit-form', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
+            // Create Slack message
+            const slackMessage = {
+                text: `🚀 New Access Request from ${data.name}`,
+                blocks: [
+                    {
+                        type: 'header',
+                        text: {
+                            type: 'plain_text',
+                            text: '🚀 New Access Request - ZENPULSAR'
+                        }
                     },
-                    body: JSON.stringify(data)
-                });
-                
-                if (response.ok) {
+                    {
+                        type: 'section',
+                        fields: [
+                            {
+                                type: 'mrkdwn',
+                                text: `*Name:* ${data.name}`
+                            },
+                            {
+                                type: 'mrkdwn',
+                                text: `*Email:* ${data.email}`
+                            },
+                            {
+                                type: 'mrkdwn',
+                                text: `*Company:* ${data.company}`
+                            },
+                            {
+                                type: 'mrkdwn',
+                                text: `*Product Interest:* ${data.product}`
+                            }
+                        ]
+                    },
+                    {
+                        type: 'context',
+                        elements: [
+                            {
+                                type: 'mrkdwn',
+                                text: `Submitted on ${new Date().toLocaleString()}`
+                            }
+                        ]
+                    }
+                ]
+            };
+            
+            // Send to Slack
+            sendToSlack(slackMessage)
+                .done(function() {
                     alert('Access request sent successfully to Slack!');
                     closeAccessModal();
-                    this.reset();
-                } else {
-                    throw new Error('Failed to send request');
-                }
-            } catch (error) {
-                console.error('Error sending form:', error);
-                alert('Failed to send request. Please try again.');
-            } finally {
-                // Reset button state
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-            }
+                    $('#accessForm')[0].reset();
+                })
+                .fail(function() {
+                    alert('Failed to send request. Please try again.');
+                })
+                .always(function() {
+                    // Reset button state
+                    $submitButton.text(originalText).prop('disabled', false);
+                });
         });
 
         // Close modal with Escape key
