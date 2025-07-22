@@ -1,0 +1,19 @@
+#:schema node_modules/wrangler/config-schema.json
+main = ".open-next/worker.js"
+name = "zenpulsar-nextjs"
+compatibility_date = "2025-01-22"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+# Environment variables
+[vars]
+NODE_ENV = "production"
+NEXT_PUBLIC_SITE_URL = "https://commodities.zenpulsar.com/"
+
+# Secrets (set via wrangler secret put)
+# SLACK_WEBHOOK_URL
+# SLACK_CHANNEL  
+# RESEND_API_KEY т
