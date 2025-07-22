@@ -1,0 +1,13 @@
+{
+  "name": "zenpulsar-landing",
+  "compatibility_date": "2025-07-14",
+  "main": "./server.js",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "."
+  },
+  "observability": {
+    "enabled": true
+  },
+  "upload_source_maps": true
+}
